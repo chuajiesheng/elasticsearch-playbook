@@ -22,5 +22,8 @@
   - name: Install screen
     apt: name=screen state=present
 
+  - name: Install curl
+    apt: name=curl state=present
+
   - name: Install vim
     apt: name=vim state=present

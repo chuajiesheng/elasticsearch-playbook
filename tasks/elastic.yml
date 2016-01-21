@@ -1,0 +1,40 @@
+---
+- name: Install and configure elasticsearch
+  hosts: all
+  remote_user: root
+  tasks:
+    - name: Install elasticsearch
+      apt: name=elasticsearch state=present
+
+    - name: Start elasticsearch at run
+      service: name=elasticsearch enabled=true
+
+- name: Configuring http node
+  hosts: elasticsearch-http
+  remote_user: root
+  tasks:
+    - name: Copy http configuration
+      copy: src=../vars/elasticsearch.http.yml dest=/etc/elasticsearch/elasticsearch.yml owner=elasticsearch group=elasticsearch mode=0644
+
+    - name: Start elasticsearch at run
+      service: name=elasticsearch state=restarted
+
+- name: Configuring data node
+  hosts: elasticsearch-data
+  remote_user: root
+  tasks:
+    - name: Copy http configuration
+      copy: src=../vars/elasticsearch.data.yml dest=/etc/elasticsearch/elasticsearch.yml owner=elasticsearch group=elasticsearch mode=0644
+
+    - name: Start elasticsearch at run
+      service: name=elasticsearch state=restarted
+
+- name: Configuring default
+  hosts: all
+  remote_user: root
+  tasks:
+    - name: Copy default configuration
+      copy: src=../vars/elasticsearch dest=/etc/default/elasticsearch owner=elasticsearch group=elasticsearch mode=0644
+
+    - name: Start elasticsearch at run
+      service: name=elasticsearch state=restarted
