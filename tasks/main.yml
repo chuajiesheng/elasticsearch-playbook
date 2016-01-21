@@ -1,0 +1,8 @@
+---
+# Elasticsearch Ansible Tasks
+
+# Update
+- include: update.yml
+
+# Configure timezone
+- include: timezone.yml
