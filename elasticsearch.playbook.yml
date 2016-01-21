@@ -1,0 +1,25 @@
+---
+- hosts: elasticsearch-nodes
+  vars:
+    ansible_python_interpreter: "/usr/bin/env python"
+  remote_user: root
+  become: sudo
+  
+  tasks:
+  - name: ensure dpkg is working properly
+    command: dpkg --configure -a
+
+  - name: clear unmet dependencies
+    command: apt-get -f -y install
+
+  - name: ensure apt-get is updated
+    apt: update_cache=yes
+
+  - name: upgrade the package
+    apt: upgrade=full
+
+  - name: install screen
+    apt: name=screen state=present
+
+  - name: install vim
+    apt: name=vim state=present

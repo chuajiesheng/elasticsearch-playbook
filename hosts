@@ -1,0 +1,11 @@
+[elasticsearch-nodes]
+es.jschua.com
+es-02.jschua.com
+es-03.jschua.com
+
+[elasticsearch-master]
+es.jschua.com
+
+[elasticsearch-data]
+es-02.jschua.com
+es-03.jschua.com
