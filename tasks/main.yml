@@ -6,3 +6,6 @@
 
 # Configure timezone
 - include: timezone.yml
+
+# Install and configure elasticsearch
+- include: elastic.yml

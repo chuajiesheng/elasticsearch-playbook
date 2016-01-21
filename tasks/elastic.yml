@@ -14,7 +14,7 @@
   remote_user: root
   tasks:
     - name: Copy http configuration
-      copy: src=../vars/elasticsearch.http.yml dest=/etc/elasticsearch/elasticsearch.yml owner=elasticsearch group=elasticsearch mode=0644
+      template: src=../vars/elasticsearch-http.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml owner=elasticsearch group=elasticsearch mode=0644
 
     - name: Start elasticsearch at run
       service: name=elasticsearch state=restarted
@@ -24,7 +24,7 @@
   remote_user: root
   tasks:
     - name: Copy http configuration
-      copy: src=../vars/elasticsearch.data.yml dest=/etc/elasticsearch/elasticsearch.yml owner=elasticsearch group=elasticsearch mode=0644
+      template: src=../vars/elasticsearch-data.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml owner=elasticsearch group=elasticsearch mode=0644
 
     - name: Start elasticsearch at run
       service: name=elasticsearch state=restarted
