@@ -1,5 +1,7 @@
 ---
 - name: Install and configure elasticsearch
+  become: yes
+  become_method: sudo
   hosts: all
   remote_user: root
   tasks:
