@@ -1,0 +1,7 @@
+---
+- name: Restart all node
+  hosts: all
+  remote_user: root
+  tasks:
+    - name: Restart elasticsearch
+      service: name=elasticsearch state=restarted
