@@ -2,14 +2,14 @@
 - name: Configure the Timezone
   hosts: all
   remote_user: root
+  become: yes
+  become_method: sudo
   tasks:
 
     - name: Update Timezone to Asia/Singapore
       copy: content="Asia/Singapore\n" dest=/etc/timezone owner=root group=root mode=0644
-      sudo: true
       register: timezone
 
     - name: Reconfigure Timezone Data
       shell: dpkg-reconfigure -f noninteractive tzdata
-      sudo: true
       when: timezone.changed
