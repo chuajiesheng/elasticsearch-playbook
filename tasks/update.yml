@@ -28,3 +28,6 @@
 
   - name: Install vim
     apt: name=vim state=present
+
+  - name: Install python-pip
+    apt: name=python-pip state=present
