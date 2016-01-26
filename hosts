@@ -4,12 +4,22 @@ es-02.jschua.com
 es-03.jschua.com
 es-04.jschua.com
 es-05.jschua.com
+es-06.jschua.com
+es-07.jschua.com
+es-08.jschua.com
+es-09.jschua.com
 
 [elasticsearch-http]
 es.jschua.com
 
-[elasticsearch-data]
+[elasticsearch-master]
 es-02.jschua.com
 es-03.jschua.com
 es-04.jschua.com
 es-05.jschua.com
+
+[elasticsearch-data]
+es-06.jschua.com
+es-07.jschua.com
+es-08.jschua.com
+es-09.jschua.com

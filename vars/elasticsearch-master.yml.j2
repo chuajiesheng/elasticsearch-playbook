@@ -61,15 +61,15 @@ cluster.name: elasticsearch-jschua
 # 2. You want this node to only serve as a master: to not store any data and
 #    to have free resources. This will be the "coordinator" of your cluster.
 #
-#node.master: true
-#node.data: false
+node.master: true
+node.data: false
 #
 # 3. You want this node to be neither master nor data node, but
 #    to act as a "search load balancer" (fetching data from nodes,
 #    aggregating results, etc.)
 #
-node.master: false
-node.data: false
+#node.master: false
+#node.data: false
 
 # Use the Cluster Health API [http://localhost:9200/_cluster/health], the
 # Node Info API [http://localhost:9200/_nodes] or GUI tools
@@ -200,16 +200,16 @@ path.data: /var/lib/elasticsearch
 
 # Set the bind address specifically (IPv4 or IPv6):
 #
-network.bind_host: 0.0.0.0
+#network.bind_host: 192.168.0.1
 
 # Set the address other nodes will use to communicate with this node. If not
 # set, it is automatically derived. It must point to an actual IP address.
 #
-network.publish_host: {{ ansible_eth1.ipv4.address }}
+#network.publish_host: 192.168.0.1
 
 # Set both 'bind_host' and 'publish_host':
 #
-#network.host: 192.168.0.1
+network.host: {{ ansible_eth1.ipv4.address }}
 
 # Set a custom port for the node to node communication (9300 by default):
 #
@@ -221,7 +221,7 @@ transport.tcp.port: 9300
 
 # Set a custom port to listen for HTTP traffic:
 #
-http.port: 9200
+#http.port: 9200
 
 # Set a custom allowed content length:
 #
@@ -229,7 +229,7 @@ http.port: 9200
 
 # Disable HTTP completely:
 #
-http.enabled: true
+http.enabled: false
 
 
 ################################### Gateway ###################################
@@ -323,7 +323,7 @@ discovery.zen.ping.multicast.enabled: false
 # 2. Configure an initial list of master nodes in the cluster
 #    to perform discovery when new nodes (master or data) are started:
 #
-discovery.zen.ping.unicast.hosts: [{% for host in groups['elasticsearch-nodes'] %}{{'"' + hostvars[host].ansible_eth1.ipv4.address + '",'}}{% endfor %}]
+discovery.zen.ping.unicast.hosts: [{% for host in groups['elasticsearch-nodes'] %}{% if ansible_eth1.ipv4.address != hostvars[host].ansible_eth1.ipv4.address %}{{'"' + hostvars[host].ansible_eth1.ipv4.address + '",'}} {% endif %}{% endfor %}]
 
 # EC2 discovery allows to use AWS EC2 API in order to perform discovery.
 #

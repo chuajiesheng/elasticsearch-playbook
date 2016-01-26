@@ -44,19 +44,19 @@ cluster.name: elasticsearch-jschua
 #
 # Allow this node to be eligible as a master node (enabled by default):
 #
-node.master: true
+#node.master: true
 #
 # Allow this node to store data (enabled by default):
 #
-node.data: true
+#node.data: true
 
 # You can exploit these settings to design advanced cluster topologies.
 #
 # 1. You want this node to never become a master node, only to hold data.
 #    This will be the "workhorse" of your cluster.
 #
-#node.master: false
-#node.data: true
+node.master: false
+node.data: true
 #
 # 2. You want this node to only serve as a master: to not store any data and
 #    to have free resources. This will be the "coordinator" of your cluster.
@@ -307,7 +307,7 @@ discovery.zen.minimum_master_nodes: 1
 # Set this option to a higher value on a slow or congested network
 # to minimize discovery failures:
 #
-discovery.zen.ping.timeout: 10s
+discovery.zen.ping.timeout: 30s
 
 # For more information, see
 # <http://elasticsearch.org/guide/en/elasticsearch/reference/current/modules-discovery-zen.html>
@@ -323,7 +323,7 @@ discovery.zen.ping.multicast.enabled: false
 # 2. Configure an initial list of master nodes in the cluster
 #    to perform discovery when new nodes (master or data) are started:
 #
-discovery.zen.ping.unicast.hosts: [{% for host in groups['elasticsearch-data'] %}{% if ansible_eth1.ipv4.address != hostvars[host].ansible_eth1.ipv4.address %}{{'"' + hostvars[host].ansible_eth1.ipv4.address + '",'}} {% endif %}{% endfor %}]
+discovery.zen.ping.unicast.hosts: [{% for host in groups['elasticsearch-nodes'] %}{% if ansible_eth1.ipv4.address != hostvars[host].ansible_eth1.ipv4.address %}{{'"' + hostvars[host].ansible_eth1.ipv4.address + '",'}} {% endif %}{% endfor %}]
 
 # EC2 discovery allows to use AWS EC2 API in order to perform discovery.
 #
