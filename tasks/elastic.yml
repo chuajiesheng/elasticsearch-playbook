@@ -18,8 +18,12 @@
     - name: Copy http configuration
       template: src=../vars/elasticsearch-http.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml owner=elasticsearch group=elasticsearch mode=0644
 
-    - name: Start elasticsearch at run
-      service: name=elasticsearch state=restarted
+- name: Configuring master node
+  hosts: elasticsearch-master
+  remote_user: root
+  tasks:
+    - name: Copy http configuration
+      template: src=../vars/elasticsearch-master.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml owner=elasticsearch group=elasticsearch mode=0644
 
 - name: Configuring data node
   hosts: elasticsearch-data
@@ -27,9 +31,6 @@
   tasks:
     - name: Copy http configuration
       template: src=../vars/elasticsearch-data.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml owner=elasticsearch group=elasticsearch mode=0644
-
-    - name: Start elasticsearch at run
-      service: name=elasticsearch state=restarted
 
 - name: Configuring default
   hosts: all
