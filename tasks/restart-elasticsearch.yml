@@ -1,5 +1,5 @@
 ---
-- name: Restart all node
+- name: Restart all elasticsearch node
   hosts: all
   remote_user: root
   tasks:
