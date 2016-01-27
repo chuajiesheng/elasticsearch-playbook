@@ -32,10 +32,13 @@
     - name: Copy data configuration
       template: src=../vars/elasticsearch-data.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml owner=elasticsearch group=elasticsearch mode=0644
 
-- name: Configuring default
+- name: Configuring logging and default
   hosts: all
   remote_user: root
   tasks:
+    - name: Copy logging configuration
+      copy: src=../vars/logging.yml dest=/etc/elasticsearch/logging.yml owner=elasticsearch group=elasticsearch mode=0644
+
     - name: Copy default configuration
       copy: src=../vars/elasticsearch dest=/etc/default/elasticsearch owner=elasticsearch group=elasticsearch mode=0644
 
