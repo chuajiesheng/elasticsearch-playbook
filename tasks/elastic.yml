@@ -5,8 +5,17 @@
   hosts: all
   remote_user: root
   tasks:
+    - name: Add elasticsearch pgp key
+      apt_key: url=https://packages.elastic.co/GPG-KEY-elasticsearch state=present
+
+    - name: Add package list
+      shell: echo "deb http://packages.elastic.co/elasticsearch/2.x/debian stable main" > /etc/apt/sources.list.d/elasticsearch-2.x.list
+
+    - name: Ensure apt-get is updated
+      apt: update_cache=yes
+
     - name: Install elasticsearch
-      apt: name=elasticsearch state=present
+      apt: name=elasticsearch state=latest
 
     - name: Start elasticsearch at run
       service: name=elasticsearch enabled=true
