@@ -54,7 +54,9 @@ path.data: /var/lib/elasticsearch
 #
 # Set the bind address to a specific IP (IPv4 or IPv6):
 #
-network.host: {{ ansible_eth1.ipv4.address }}
+network.bind_host: _local_
+network.publish_host: {{ ansible_eth1.ipv4.address }}
+
 http.enabled: true
 #
 # Set a custom port for HTTP:
