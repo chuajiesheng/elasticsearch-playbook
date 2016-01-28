@@ -20,14 +20,11 @@
   - name: Upgrade the package
     apt: upgrade=full
 
-  - name: Install screen
-    apt: name=screen state=present
-
-  - name: Install curl
-    apt: name=curl state=present
-
-  - name: Install vim
-    apt: name=vim state=present
-
-  - name: Install python-pip
-    apt: name=python-pip state=present
+  - name: Install packages
+    apt: name={{item}} state=latest
+    with_items:
+       - screen
+       - curl
+       - git
+       - vim
+       - python-pip
