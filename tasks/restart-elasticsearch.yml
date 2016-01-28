@@ -2,14 +2,16 @@
 - name: Restart all elasticsearch node
   hosts: all
   remote_user: root
+  become: yes
+  become_method: sudo
   tasks:
     - name: Find all logs
-      shell: ls -1 /var/log/elasticsearch/*.log
-  	  register: logs
+      shell: ls -1 /var/log/elasticsearch/*.log*
+      register: logs
 
-  	- name: Remove all logs
-  	  file: path=/var/log/elasticsearch/{{ item }} state=absent
-  	  with_items: logs.stdout_lines
+    - name: Remove all logs
+      file: path={{ item }} state=absent
+      with_items: logs.stdout_lines
 
     - name: Restart elasticsearch
       service: name=elasticsearch state=restarted
