@@ -3,5 +3,13 @@
   hosts: all
   remote_user: root
   tasks:
+    - name: Find all logs
+      shell: ls -1 /var/log/elasticsearch/*.log
+  	  register: logs
+
+  	- name: Remove all logs
+  	  file: path=/var/log/elasticsearch/{{ item }} state=absent
+  	  with_items: logs.stdout_lines
+
     - name: Restart elasticsearch
       service: name=elasticsearch state=restarted

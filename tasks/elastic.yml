@@ -55,4 +55,4 @@
       copy: src=../vars/elasticsearch dest=/etc/default/elasticsearch owner=elasticsearch group=elasticsearch mode=0644
 
     - name: Start elasticsearch at run
-      service: name=elasticsearch state=restarted
+      include: restart-elasticsearch.yml
