@@ -54,5 +54,4 @@
     - name: Copy default configuration
       copy: src=../vars/elasticsearch dest=/etc/default/elasticsearch owner=elasticsearch group=elasticsearch mode=0644
 
-    - name: Start elasticsearch at run
-      include: restart-elasticsearch.yml
+- include: restart-elasticsearch.yml
