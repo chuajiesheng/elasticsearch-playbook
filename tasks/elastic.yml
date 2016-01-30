@@ -55,6 +55,6 @@
       template: src=../vars/elasticsearch-data.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml owner=elasticsearch group=elasticsearch mode=0644
 
     - name: Copy default configuration
-      copy: src=../vars/elasticsearch dest=/etc/default/elasticsearch-data owner=elasticsearch group=elasticsearch mode=064
+      copy: src=../vars/elasticsearch-data dest=/etc/default/elasticsearch owner=elasticsearch group=elasticsearch mode=064
 
 - include: restart-elasticsearch.yml
