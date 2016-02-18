@@ -19,7 +19,7 @@ LOG_DIR=/var/log/elasticsearch
 
 # Heap size defaults to 256m min, 1g max
 # Set ES_HEAP_SIZE to 50% of available RAM, but no more than 31g
-ES_HEAP_SIZE=512m
+ES_HEAP_SIZE=4g
 
 # Heap new generation
 #ES_HEAP_NEWSIZE=
