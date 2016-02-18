@@ -7,6 +7,8 @@
   tasks:
     - name: Add elasticsearch pgp key
       apt_key: url=http://packages.elastic.co/GPG-KEY-elasticsearch state=present
+      environment:
+        http_proxy: http://10.5.0.1:3128
 
     - name: Add package list
       shell: echo "deb http://packages.elastic.co/elasticsearch/2.x/debian stable main" > /etc/apt/sources.list.d/elasticsearch-2.x.list
