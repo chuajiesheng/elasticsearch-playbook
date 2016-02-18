@@ -1,7 +1,7 @@
 ---
 - name: Restart all elasticsearch node
   hosts: all
-  remote_user: root
+  remote_user: elastic
   become: yes
   become_method: sudo
   tasks:
