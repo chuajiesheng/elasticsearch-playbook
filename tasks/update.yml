@@ -3,7 +3,7 @@
   hosts: all
   vars:
     ansible_python_interpreter: "/usr/bin/env python"
-  remote_user: root
+  remote_user: elastic
   become: yes
   become_method: sudo
   
