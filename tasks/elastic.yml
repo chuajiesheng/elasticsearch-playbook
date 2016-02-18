@@ -26,6 +26,8 @@
       service: name=elasticsearch enabled=true
 
 - name: Configuring logging and default
+  become: yes
+  become_method: sudo
   hosts: all
   remote_user: elastic
   tasks:
@@ -36,6 +38,8 @@
       copy: src=../vars/elasticsearch dest=/etc/default/elasticsearch owner=elasticsearch group=elasticsearch mode=064
 
 - name: Configuring http node
+  become: yes
+  become_method: sudo
   hosts: elasticsearch-http
   remote_user: elastic
   tasks:
@@ -46,6 +50,8 @@
       copy: src=../vars/elasticsearch-big-node dest=/etc/default/elasticsearch owner=elasticsearch group=elasticsearch mode=064
 
 - name: Configuring master node
+  become: yes
+  become_method: sudo
   hosts: elasticsearch-master
   remote_user: elastic
   tasks:
@@ -53,6 +59,8 @@
       template: src=../vars/elasticsearch-master.yml.j2 dest=/etc/elasticsearch/elasticsearch.yml owner=elasticsearch group=elasticsearch mode=0644
 
 - name: Configuring data node
+  become: yes
+  become_method: sudo
   hosts: elasticsearch-data
   remote_user: elastic
   tasks:
