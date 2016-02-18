@@ -54,10 +54,8 @@ bootstrap.mlockall: true
 #
 # Set the bind address to a specific IP (IPv4 or IPv6):
 #
-http.host: localhost
+network.host: {{ ansible_eth0.ipv4.address }}
 http.enabled: true
-
-transport.host: {{ ansible_eth1.ipv4.address }}
 #
 # Set a custom port for HTTP:
 #
